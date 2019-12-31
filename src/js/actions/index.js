@@ -1,4 +1,4 @@
-import { ADD_ARTICLE, DATA_LOADED } from "../constants/action-types"
+import { ADD_ARTICLE, DATA_LOADED, DELETE_ARTICLE } from "../constants/action-types"
 
 export function addArticle(payload){
     return { type: ADD_ARTICLE, payload }
@@ -12,4 +12,8 @@ export function getData() {
           dispatch({ type: DATA_LOADED, payload: json })
         })
     }
+}
+
+export function deleteArticle(payload){
+  return { type: DELETE_ARTICLE, payload }
 }
