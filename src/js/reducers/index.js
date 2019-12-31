@@ -1,4 +1,4 @@
-import { ADD_ARTICLE, DATA_LOADED, DELETE_ARTICLE } from "../constants/action-types"
+import { ADD_ARTICLE, DATA_LOADED, DELETE_ARTICLE, API_ERRORED } from "../constants/action-types"
 
 const initialState = {
     articles: [],
@@ -20,7 +20,14 @@ function rootReducer(state = initialState, action) {
 
     if (action.type === DELETE_ARTICLE) {
         return Object.assign({}, state, {
-            articles: state.articles.filter(article => article.id != action.payload.id)
+            articles: state.articles.filter(article => article.id !== action.payload.id)
+        })
+    }
+
+    if (action.type === API_ERRORED) {
+        console.error(action.payload)
+        return Object.assign({}, state, {
+            remoteArticles: state.remoteArticles.concat({id: "error", title: "API Error"})
         })
     }
 
